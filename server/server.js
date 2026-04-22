@@ -3,8 +3,13 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const connectDB = require("./config/db")
+const authRoutes =  require("./routes/authRoutes")
 
 dotenv.config();
+
+// connect db
+connectDB();
 
 const app = express();
 
@@ -14,8 +19,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.json({ success:true, message: "API is running 🚀" });
+  res.status(200).json({ success:true, message: "API is running 🚀" });
 });
+
+app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
