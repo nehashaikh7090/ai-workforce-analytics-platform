@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const connectDB = require("./config/db")
 const authRoutes =  require("./routes/authRoutes")
 const testRoutes = require("./routes/testRoutes");
+const userRoutes = require('./routes/userRoutes')
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/test", testRoutes);
+app.use("/api/users", userRoutes)
 
 const PORT = process.env.PORT || 5000;
 
